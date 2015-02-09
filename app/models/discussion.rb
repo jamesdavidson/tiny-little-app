@@ -5,15 +5,15 @@ class Discussion < ActiveRecord::Base
   has_many :beverages, :through => :updates, :source => :updatable, :source_type => 'Beverage'
 
   def current_topic
-    self.topics.order('created_at ASC').first || Topic.null_record
+    self.topics.order('created_at ASC').last || Topic.null_record
   end
 
   def current_location
-    self.locations.order('created_at ASC').first || Location.null_record
+    self.locations.order('created_at ASC').last || Location.null_record
   end
 
   def current_beverage
-    self.beverages.order('created_at ASC').first || Beverage.null_record
+    self.beverages.order('created_at ASC').last || Beverage.null_record
   end
 
   def title
