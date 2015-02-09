@@ -10,6 +10,10 @@
 
 d = Discussion.create(shortlink: 'a123x4')
 
+Topic.create(id: 0, name: 'No topic')
+Location.create(id: 0, name: 'Nowhere')
+Beverage.create(id: 0, name: 'Nothing')
+
 Update.create(discussion: d, updatable: Topic.create(name: 'Programming'))
 Update.create(discussion: d, updatable: Location.create(name: 'Melbourne'))
 Update.create(discussion: d, updatable: Beverage.create(name: 'Coffee'))
