@@ -9,10 +9,9 @@
 [Discussion,Update,Topic,Location,Beverage].each(&:delete_all)
 
 d = Discussion.create(shortlink: 'a123x4')
-Update.create(discussion: d)
-Update.create(discussion: d)
-Update.create(discussion: d)
 
-# Update.create(discussion: d, updatable: Topic.create(name: 'Programming'))
-# Update.create(discussion: d, updatable: Location.create(name: 'Melbourne'))
-# Update.create(discussion: d, updatable: Beverage.create(name: 'Coffee'))
+Update.create(discussion: d, updatable: Topic.create(name: 'Programming'))
+Update.create(discussion: d, updatable: Location.create(name: 'Melbourne'))
+Update.create(discussion: d, updatable: Beverage.create(name: 'Coffee'))
+Update.create(discussion: d, updatable: Location.create(name: 'Programming'), retraction: true)
+Update.create(discussion: d, updatable: Location.create(name: 'Sydney'))
