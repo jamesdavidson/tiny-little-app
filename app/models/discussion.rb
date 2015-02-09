@@ -1,17 +1,16 @@
 class Discussion < ActiveRecord::Base
   has_many :updates
 
+  # define the current_topic, current_location and current_beverage methods
   ['topic','location','beverage'].each do |thing|
     class_eval "def current_#{thing}
-        result = nil
-        self.updates.where(updatable_type: '#{thing.capitalize}').each do |u|
+        self.updates.where(updatable_type: '#{thing.capitalize}').reduce(nil) do |result,u|
           if u.retraction?
             result = nil
           else
             result = u.updatable
           end
         end
-        result
       end"
   end
 
