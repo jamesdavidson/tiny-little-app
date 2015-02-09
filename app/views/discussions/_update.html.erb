@@ -1,0 +1,6 @@
+<h2 class='content-subhead'>Change to <%= update.updatable_type %></h2>
+<p>
+  The <%= update.updatable_type %>
+  is <%= update.retraction ? 'no longer' : 'now' %>
+  set to <%= update.updatable.try(:name) %>.
+</p>
