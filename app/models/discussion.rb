@@ -39,4 +39,8 @@ class Discussion < ActiveRecord::Base
     end
     result
   end
+
+  def title
+    self.current_topic.name || 'No topic set'
+  end
 end
