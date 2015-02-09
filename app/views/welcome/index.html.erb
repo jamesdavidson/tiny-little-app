@@ -1,5 +1,7 @@
 <% if current_user %>
   <p>signed in!</p>
+  <%= link_to 'sign out', destroy_user_session_path, :method => :delete %>
 <% else %>
   <p>not signed in</p>
+  <%= link_to 'sign in', new_user_session_path, :method => :get %>
 <% end%>
