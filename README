@@ -1,1 +1,18 @@
 A tiny little app for organising discussions. Work in progress.
+
+---
+
+A discussion takes place at a certain location, on a certain topic and while
+drinking a certain beverage.
+
+The discussion's state can change over time so it is modelled as a list of
+updates. Each update refers to either the topic, the location or the beverage.
+The discussion's current state is derived from the most recent updates.
+
+For example, while a discussion might start on one topic, it can be updated as
+it changes to another topic but we keep a list of previous topics.
+
+The ActiveRecord models are Discussion, Update, Topic, Location and Beverage.
+There's a polymorphic thingie in there which makes it all work. This is the
+first time I have tried to use one of ActiveRecord's more advanced features.
+Please send me any feedback you might have.
