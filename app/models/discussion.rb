@@ -4,40 +4,18 @@ class Discussion < ActiveRecord::Base
   has_many :locations, :through => :updates, :source => :updatable, :source_type => 'Location'
   has_many :beverages, :through => :updates, :source => :updatable, :source_type => 'Beverage'
 
-  def current_topic
-    result = nil
-    self.updates.where(updatable_type: 'Topic').each do |u|
-      if u.retraction?
+  ['topic','location','beverage'].each do |thing|
+    class_eval "def current_#{thing}
         result = nil
-      else
-        result = u.updatable
-      end
-    end
-    result
-  end
-
-  def current_location
-    result = nil
-    self.updates.where(updatable_type: 'Location').each do |u|
-      if u.retraction?
-        result = nil
-      else
-        result = u.updatable
-      end
-    end
-    result
-  end
-
-  def current_beverage
-    result = nil
-    self.updates.where(updatable_type: 'Beverage').each do |u|
-      if u.retraction?
-        result = nil
-      else
-        result = u.updatable
-      end
-    end
-    result
+        self.updates.where(updatable_type: '#{thing.capitalize}').each do |u|
+          if u.retraction?
+            result = nil
+          else
+            result = u.updatable
+          end
+        end
+        result
+      end"
   end
 
   def title
