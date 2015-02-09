@@ -11,13 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209080154) do
+ActiveRecord::Schema.define(version: 20150209082128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "beverages", force: :cascade do |t|
+    t.text     "name"
+    t.boolean  "caffeinated"
+    t.boolean  "alcoholic"
+    t.boolean  "hot"
+    t.boolean  "cold"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "discussions", force: :cascade do |t|
     t.text     "shortlink"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.text     "name"
+    t.boolean  "physical"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.text     "name"
+    t.text     "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

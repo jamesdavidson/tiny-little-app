@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  caffeinated: false
+  alcoholic: false
+  hot: false
+  cold: false
+
+two:
+  name: MyText
+  caffeinated: false
+  alcoholic: false
+  hot: false
+  cold: false
