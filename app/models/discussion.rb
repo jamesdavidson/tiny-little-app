@@ -4,27 +4,21 @@ class Discussion < ActiveRecord::Base
   has_many :locations, :through => :updates, :source => :updatable, :source_type => 'Location'
   has_many :beverages, :through => :updates, :source => :updatable, :source_type => 'Beverage'
 
-  # define the current_topic, current_location and current_beverage methods
-  ['topic','location','beverage'].each do |thing|
-    class_eval "def current_#{thing}
-        self.updates.where(updatable_type: '#{thing.capitalize}').reduce(nil) do |result,u|
-          if u.retraction?
-            result = nil
-          else
-            result = u.updatable
-          end
-        end
-      end"
+  def current_topic
+    self.topics.order('created_at ASC').first || Topic.null_record
+  end
+
+  def current_location
+    self.locations.order('created_at ASC').first || Location.null_record
+  end
+
+  def current_beverage
+    self.beverages.order('created_at ASC').first || Beverage.null_record
   end
 
   def title
-    topic = self.current_topic.try(:name)
-    location = self.current_location.try(:name)
-    beverage = self.current_beverage.try(:name)
-    [
-      (topic || 'No set topic'), 'is being discussed',
-      (location ? 'at ' + location : nil),
-      (beverage ? 'whilst drinking ' + beverage : nil)
-    ].compact.join(' ') + '.'
+    "#{self.current_topic.name} is being discussed " \
+    "at #{self.current_location.name} " \
+    "whilst drinking #{self.current_beverage.name}."
   end
 end
