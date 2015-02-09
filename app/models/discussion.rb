@@ -41,6 +41,13 @@ class Discussion < ActiveRecord::Base
   end
 
   def title
-    self.current_topic.name || 'No topic set'
+    topic = self.current_topic.try(:name)
+    location = self.current_location.try(:name)
+    beverage = self.current_beverage.try(:name)
+    [
+      (topic || 'No set topic'), 'is being discussed',
+      (location ? 'at ' + location : nil),
+      (beverage ? 'whilst drinking ' + beverage : nil)
+    ].compact.join(' ') + '.'
   end
 end
